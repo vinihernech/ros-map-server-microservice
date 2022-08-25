@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "is-ros-map-server"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: is-ros-map-server
+    spec:
+      volumes:
+        - name: nfs
+          persistentVolumeClaim:
+            claimName: nfs-claim1
+      containers:
+      - name: service
+        image: vinihernech/is_ros_map_server:v2
+        args:
+          - roslaunch
+          - map_server.launch
+          - map:=my_map.yaml
+        env:
+        - name: ROS_MASTER_URI
+          value: http://10.10.3.188:30015
+        - name: ROS_IP
+          value: 10.10.3.188
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: "/opt/ros/noetic/share/map_server/maps"
+            name: nfs                        
+      
+      hostNetwork: true
+
+
