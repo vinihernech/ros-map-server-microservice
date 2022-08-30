@@ -14,7 +14,7 @@ spec:
           persistentVolumeClaim:
             claimName: nfs-claim1
       containers:
-      - name: service
+      - name: ros-map-server
         image: vinihernech/is_ros_map_server:v2
         args:
           - roslaunch
@@ -28,6 +28,17 @@ spec:
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: "/opt/ros/noetic/share/map_server/maps"
+            name: nfs  
+
+      - name: is-map-server
+        image: vinihernech/is-map-server:v1
+        args:
+          - python3
+          - main.py
+          - my_map0.yaml
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: "/opt/map_server/maps"
             name: nfs                        
       
       hostNetwork: true
