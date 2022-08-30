@@ -13,39 +13,32 @@ _sym_db = _symbol_database.Default()
 
 
 from is_msgs import common_pb2 as is__msgs_dot_common__pb2
-from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
+from is_msgs import image_pb2 as is__msgs_dot_image__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='maprequest.proto',
-  package='is.robot',
+  package='is.vision',
   syntax='proto3',
-  serialized_options=_b('\n\014com.is.robotP\001'),
-  serialized_pb=_b('\n\x10maprequest.proto\x12\x08is.robot\x1a\x14is_msgs/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"8\n\nMapRequest\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x1e\n\x05poses\x18\x02 \x03(\x0b\x32\x0f.is.common.Pose\"\x82\x01\n\x0fMapRequestReply\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x16\n\x0emap_resolution\x18\x02 \x01(\x02\x12\r\n\x05width\x18\x03 \x01(\r\x12\x0e\n\x06height\x18\x04 \x01(\r\x12\x1f\n\x06origin\x18\x05 \x01(\x0b\x32\x0f.is.common.Pose\x12\x0b\n\x03map\x18\x06 \x03(\x03\x42\x10\n\x0c\x63om.is.robotP\x01\x62\x06proto3')
+  serialized_options=None,
+  serialized_pb=_b('\n\x10maprequest.proto\x12\tis.vision\x1a\x14is_msgs/common.proto\x1a\x13is_msgs/image.proto\"\x18\n\nMapRequest\x12\n\n\x02id\x18\x01 \x01(\x04\"\xc4\x01\n\x0fMapRequestReply\x12\x1d\n\x03map\x18\x01 \x01(\x0b\x32\x10.is.vision.Image\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x16\n\x0emap_resolution\x18\x03 \x01(\x02\x12\x1f\n\x06origin\x18\x04 \x01(\x0b\x32\x0f.is.common.Pose\x12\x0e\n\x06negate\x18\x05 \x01(\x08\x12\x17\n\x0foccupied_thresh\x18\x06 \x01(\x02\x12\x13\n\x0b\x66ree_thresh\x18\x07 \x01(\x02\x12\x0f\n\x07map_dir\x18\x08 \x01(\tb\x06proto3')
   ,
-  dependencies=[is__msgs_dot_common__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
+  dependencies=[is__msgs_dot_common__pb2.DESCRIPTOR,is__msgs_dot_image__pb2.DESCRIPTOR,])
 
 
 
 
 _MAPREQUEST = _descriptor.Descriptor(
   name='MapRequest',
-  full_name='is.robot.MapRequest',
+  full_name='is.vision.MapRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='is.robot.MapRequest.id', index=0,
+      name='id', full_name='is.vision.MapRequest.id', index=0,
       number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='poses', full_name='is.robot.MapRequest.poses', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -61,57 +54,71 @@ _MAPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=85,
-  serialized_end=141,
+  serialized_start=74,
+  serialized_end=98,
 )
 
 
 _MAPREQUESTREPLY = _descriptor.Descriptor(
   name='MapRequestReply',
-  full_name='is.robot.MapRequestReply',
+  full_name='is.vision.MapRequestReply',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='is.robot.MapRequestReply.id', index=0,
-      number=1, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='map_resolution', full_name='is.robot.MapRequestReply.map_resolution', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='width', full_name='is.robot.MapRequestReply.width', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='height', full_name='is.robot.MapRequestReply.height', index=3,
-      number=4, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='origin', full_name='is.robot.MapRequestReply.origin', index=4,
-      number=5, type=11, cpp_type=10, label=1,
+      name='map', full_name='is.vision.MapRequestReply.map', index=0,
+      number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='map', full_name='is.robot.MapRequestReply.map', index=5,
-      number=6, type=3, cpp_type=2, label=3,
-      has_default_value=False, default_value=[],
+      name='id', full_name='is.vision.MapRequestReply.id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='map_resolution', full_name='is.vision.MapRequestReply.map_resolution', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='origin', full_name='is.vision.MapRequestReply.origin', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='negate', full_name='is.vision.MapRequestReply.negate', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='occupied_thresh', full_name='is.vision.MapRequestReply.occupied_thresh', index=5,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='free_thresh', full_name='is.vision.MapRequestReply.free_thresh', index=6,
+      number=7, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='map_dir', full_name='is.vision.MapRequestReply.map_dir', index=7,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -127,11 +134,11 @@ _MAPREQUESTREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=144,
-  serialized_end=274,
+  serialized_start=101,
+  serialized_end=297,
 )
 
-_MAPREQUEST.fields_by_name['poses'].message_type = is__msgs_dot_common__pb2._POSE
+_MAPREQUESTREPLY.fields_by_name['map'].message_type = is__msgs_dot_image__pb2._IMAGE
 _MAPREQUESTREPLY.fields_by_name['origin'].message_type = is__msgs_dot_common__pb2._POSE
 DESCRIPTOR.message_types_by_name['MapRequest'] = _MAPREQUEST
 DESCRIPTOR.message_types_by_name['MapRequestReply'] = _MAPREQUESTREPLY
@@ -140,17 +147,16 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 MapRequest = _reflection.GeneratedProtocolMessageType('MapRequest', (_message.Message,), dict(
   DESCRIPTOR = _MAPREQUEST,
   __module__ = 'maprequest_pb2'
-  # @@protoc_insertion_point(class_scope:is.robot.MapRequest)
+  # @@protoc_insertion_point(class_scope:is.vision.MapRequest)
   ))
 _sym_db.RegisterMessage(MapRequest)
 
 MapRequestReply = _reflection.GeneratedProtocolMessageType('MapRequestReply', (_message.Message,), dict(
   DESCRIPTOR = _MAPREQUESTREPLY,
   __module__ = 'maprequest_pb2'
-  # @@protoc_insertion_point(class_scope:is.robot.MapRequestReply)
+  # @@protoc_insertion_point(class_scope:is.vision.MapRequestReply)
   ))
 _sym_db.RegisterMessage(MapRequestReply)
 
 
-DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)
