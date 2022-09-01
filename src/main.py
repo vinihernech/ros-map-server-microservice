@@ -3,7 +3,6 @@ import yaml
 from is_wire.core import Channel, Message, Subscription, StatusCode, Status, Logger
 from is_wire.rpc import ServiceProvider, LogInterceptor
 from maprequest_pb2 import MapRequest, MapRequestReply
-from streamChannel import StreamChannel
 import cv2
 import argparse
 
@@ -11,11 +10,11 @@ import argparse
 def send_map(message, ctx):
    map_id = message.id
    try:
-      with open(r'{}.yaml'.format(map_name)) as file:
+      with open(r'/opt/map_server/maps/{}.yaml'.format(map_name)) as file:
          map_config = yaml.load(file, Loader=yaml.FullLoader)
    except:
       print('Unable to load config file')
-   map_image = cv2.imread("{}.pgm".format(map_name),-1)
+   map_image = cv2.imread("/opt/map_server/maps/{}.pgm".format(map_name),-1)
    map_image_data = map_image.tobytes()
    map_msg = MapRequestReply()
    map_msg.map.data = map_image_data
@@ -28,7 +27,6 @@ def send_map(message, ctx):
    map_msg.negate = map_config['negate']
    map_msg.occupied_thresh = map_config['occupied_thresh']
    map_msg.free_thresh = map_config['free_thresh']
-   print(map_msg)
    return map_msg
    
 map_name = 'my_map0'
@@ -38,7 +36,7 @@ map_name = 'my_map0'
 if __name__ == '__main__':
 
    try:
-      with open(r'config.yaml') as file:
+      with open(r'/opt/map_server/config/config.yaml') as file:
          config = yaml.load(file, Loader=yaml.FullLoader)
    except:
       print('Unable to load config file')
@@ -56,7 +54,7 @@ if __name__ == '__main__':
    provider = ServiceProvider(channel)
    logging = LogInterceptor()
    provider.add_interceptor(logging)
-   robot_id = config['robot_id']
+   robot_id = config['map_id']
    topic = "IsRosMapServer.{}.MapRequest".format(robot_id)
    subscription = Subscription(channel) 
 
