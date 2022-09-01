@@ -1,17 +1,26 @@
 import yaml
-from is_msgs.robot_pb2 import RobotTaskRequest, PathRequest, RobotControllerProgress
-from is_msgs.common_pb2 import Position, Pose, Orientation
-from is_msgs.camera_pb2 import FrameTransformation,FrameTransformations
-from is_wire.core import Channel, Message, Logger,Status,StatusCode, Subscription
-from is_wire.rpc import ServiceProvider, LogInterceptor
-from google.protobuf.empty_pb2 import Empty
+from is_wire.core import Channel, Message, Subscription
 from maprequest_pb2 import MapRequest, MapRequestReply
 import socket
-from streamChannel import StreamChannel
+import numpy as np
+from is_msgs.image_pb2 import Image
+import cv2
 
+def save_map_img(map_file):
+    map_img_cod = map_file.map
+    map_img_dec = np.frombuffer(map_img_cod, dtype=np.uint8)
+    map_img_res = np.reshape(map_img_dec, newshape=(1024,1024))
+    cv2.imwrite('map.pgm', map_img_res)
+ 
 
+def build_yaml_file(map_file):
+    map_file = [{'image': map_file.map_dir},
+    {'resolution': map_file.resolution},{'origin': [map_file.origin.position.x, map_file.origin.position.y,map_file.origin.orientation.yaw]},
+    {'nagate': map_file.nagate}, {'occupied_thresh': map_file.occupied_thresh}, {'free_thresh':map_file.free_thresh} ]
+    with open(r'../etc/map_file.yaml', 'w') as file:
+        documents = yaml.dump(map_file, file)
 
-def path_task_robot(id, config):
+def get_map(id, config):
     cons_channel = Channel(config['broker_uri'])
     cons_subscription = Subscription(cons_channel)
     topic = "IsRosMapServer.{}.MapRequest".format(config['robot_id'])
@@ -21,14 +30,13 @@ def path_task_robot(id, config):
     cons_channel.publish(message,topic=topic)
     try:
         reply = cons_channel.consume(timeout=3.0)
-        struct = reply.unpack(MapRequestReply)
-        print('RPC Status:', reply.status, '\nReply:', struct)
+        map_file = reply.unpack(MapRequestReply)
+        build_yaml_file(map_file)
+        save_map_img(map_file)
+        print('RPC Status:', reply.status)
     except socket.timeout:
         print('No reply :(')
    
-    
-
-
 
 if __name__ == '__main__':
     try:
@@ -36,8 +44,8 @@ if __name__ == '__main__':
             config = yaml.load(file, Loader=yaml.FullLoader)
     except:
             print('Unable to load config file')
-
-    path_task_robot(0,config)
+    
+    get_map(0,config)
 
    
 
