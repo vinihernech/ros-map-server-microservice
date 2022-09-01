@@ -31,11 +31,11 @@ spec:
             name: nfs  
 
       - name: is-map-server
-        image: vinihernech/is-map-server:v1
+        image: vinihernech/is-map-server:v4
         args:
           - python3
           - main.py
-          - my_map0.yaml
+          - my_map
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: "/opt/map_server/maps"
