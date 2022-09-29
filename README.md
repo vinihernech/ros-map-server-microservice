@@ -1,4 +1,4 @@
-# ros-map-server-microsservice
+# ros-map-server-microservice
 
 ## About 
 Microservice that provides a map saved on an NFS server for the intelligent space environment and the ROS environment.
